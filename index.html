@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISMUN-I | Rise Above the Rift</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2b2828;
+            --secondary: #bd0000;
+            --text: #f4f4f4;
+            --glass: rgba(0, 0, 0, 0.5);
+            --border: rgba(255, 255, 255, 0.15);
+            --nav-bg: rgba(20, 20, 20, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body { 
+            background-color: var(--primary); 
+            background: linear-gradient(rgba(43, 40, 40, 0.6), rgba(43, 40, 40, 0.6)), 
+                        url('background.jpg.png'); 
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: var(--text); 
+            font-family: 'Inter', sans-serif;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            opacity: 0.15;
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            color: var(--secondary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-weight: 700;
+        }
+
+        .nav-links a:hover { color: var(--secondary); text-shadow: 0 0 10px var(--secondary); }
+
+        .greek-border {
+            width: 100%; height: 8px; background: var(--secondary);
+            margin-top: 60px;
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M0 0h20v20H0V0zm2 2v16h16V2H2zm2 2h12v4h-2V6H6v8h8v-2h-2v2H8V8h8V4H4z" fill="white"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M0 0h20v20H0V0zm2 2v16h16V2H2zm2 2h12v4h-2V6H6v8h8v-2h-2v2H8V8h8V4H4z" fill="white"/></svg>');
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        header { padding: 15vh 0 8vh; text-align: center; }
+        .main-logo-text { font-family: 'Cinzel', serif; font-weight: 900; font-size: 2.2rem; color: var(--secondary); letter-spacing: 12px; margin-bottom: 0.5rem; display: block; }
+        .main-title { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 9vw, 5.5rem); line-height: 1.1; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+
+        .section-header { padding-top: 100px; margin-top: 2rem; text-align: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 3rem; }
+        .section-header h2 { font-family: 'Cinzel', serif; font-size: 2rem; letter-spacing: 6px; color: var(--secondary); text-transform: uppercase; }
+
+        /* REGISTRATION CARDS */
+        .reg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+        .reg-card { 
+            padding: 3rem 1.5rem; 
+            border: 1px solid var(--border); 
+            text-align: center; 
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1); 
+            text-decoration: none; 
+            color: white;
+            background: var(--glass);
+            backdrop-filter: blur(2px);
+            position: relative;
+        }
+
+        .reg-card:hover { 
+            background: rgba(189, 0, 0, 0.9); 
+            border-color: var(--text);
+            transform: translateY(-8px);
+            backdrop-filter: blur(20px);
+            z-index: 10;
+        }
+
+        .reg-card span { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.8; display: block; margin-bottom: 0.8rem; }
+        .reg-card h4 { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; }
+
+        /* COMMITTEES */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding-bottom: 8rem; }
+        .card { background: var(--glass); padding: 2.5rem 1.5rem; border: 1px solid var(--border); backdrop-filter: blur(8px); position: relative; transition: 0.3s; }
+        .card h4 { font-family: 'Cinzel', serif; color: var(--secondary); letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 0.5rem; }
+        .card h3 { font-family: 'Cinzel', serif; font-size: 1.6rem; line-height: 1.2; margin-bottom: 1rem; border-bottom: 1px solid rgba(189,0,0,0.5); padding-bottom: 5px; }
+        .card h3 span { display: block; font-size: 1.1rem; opacity: 0.9; font-weight: 400; color: #fff; }
+        .card p { font-size: 0.85rem; color: #ddd; font-weight: 300; }
+
+        footer { padding: 4rem 0; text-align: center; background: rgba(0,0,0,0.7); border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">SISMUN—I</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#portals">Portals</a>
+                <a href="#lineups">Committees</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="greek-border"></div>
+
+    <div class="container">
+        <!-- HOME SECTION -->
+        <header id="home">
+            <span class="main-logo-text">SISMUN—I</span>
+            <h1 class="main-title">RISE ABOVE<br>THE RIFT</h1>
+        </header>
+
+        <!-- REGISTRATION SECTION -->
+        <div class="section-header" id="portals"><h2>Registration Portals</h2></div>
+        <section class="reg-grid">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdU_yITHO0FlBWB-4iAq81fDeYHE0--855fP29NXU-Xkxiz0w/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="reg-card">
+                <span>Governance</span>
+                <h4>Register for EB</h4>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScmJk5nse95PXO3ffcltEe2lqYkOF6Gi87PYRqn4o5ZINitNA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="reg-card">
+                <span>Individual</span>
+                <h4>Single Delegation</h4>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd8EdICJskochsw1c90OvlCs2zDH6eB9RLc9n8mToR_n_jXOA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="reg-card">
+                <span>Partnership</span>
+                <h4>Double Delegation</h4>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfbyMNylQOkxILaxf2ny8DFSlK6uuOum3-RYp8tMxrZvTY6dA/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="reg-card">
+                <span>Ambassador</span>
+                <h4>Register for CA</h4>
+            </a>
+        </section>
+
+        <!-- COMMITTEES SECTION -->
+        <div class="section-header" id="lineups"><h2>Committee Lineups</h2></div>
+        <section class="grid">
+            <div class="card"><h4>The King</h4><h3>UNSC<span>Zeus</span></h3><p>Security Council. The ultimate authority. Where the thunder of diplomacy shapes the fate of nations.</p></div>
+            <div class="card"><h4>The Strategist</h4><h3>DISEC<span>Ares</span></h3><p>Disarmament and International Security. Addressing global conflict with the precision of war.</p></div>
+            <div class="card"><h4>The Merchant</h4><h3>WTO<span>Hermes</span></h3><p>World Trade Organization. Navigating modern silk roads under the watchful eye of commerce.</p></div>
+            <div class="card"><h4>The Judge</h4><h3>UNODC<span>Minos</span></h3><p>Drugs and Crime. Imposing order and justice upon the shadows of the global underworld.</p></div>
+            <div class="card"><h4>The Celestial</h4><h3>UNOOSA<span>Ouranos</span></h3><p>Outer Space Affairs. Looking toward the heavens to govern the final frontier.</p></div>
+            <div class="card"><h4>The Nurturer</h4><h3>UNICEF<span>Demeter</span></h3><p>The Children’s Fund. Protecting future generations and the harvest of human potential.</p></div>
+            <div class="card"><h4>The Sun-Forge</h4><h3>IAEA<span>Apollo</span></h3><p>Atomic Energy Agency. Managing the power of the sun with absolute caution.</p></div>
+            <div class="card"><h4>The Architect</h4><h3>CCC<span>Hephaestus</span></h3><p>Continuous Crisis Committee. Forging solutions as the world shifts in real-time.</p></div>
+            
+            <!-- UPDATED: HUNSC -> MoWCA (Hera) -->
+            <div class="card"><h4>The Matriarch</h4><h3>MoWCA<span>Hera</span></h3><p>Ministry of Women and Children Affairs. Championing equity, safeguarding vulnerability, and defending the sacred foundational pillars of society.</p></div>
+            
+            <div class="card"><h4>The Weaver</h4><h3>AHLC<span>Clotho</span></h3><p>Alternate History Lahore Conference. Spanning the threads of "What If".</p></div>
+            <div class="card"><h4>The Muse</h4><h3>IPC<span>Calliope</span></h3><p>International Press Corps. Recording the epic and telling the stories of the gods.</p></div>
+            <div class="card"><h4>The Victor</h4><h3>FIA<span>Nike</span></h3><p>Formula 1 Council. Precision, speed, and the pursuit of the laurel wreath.</p></div>
+        </section>
+    </div>
+
+    <footer>
+        <p style="font-family: 'Cinzel', serif; letter-spacing: 3px; color: #888;">EST. 2026 | SISMUN I</p>
+    </footer>
+
+</body>
+</html>
